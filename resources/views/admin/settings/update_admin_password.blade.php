@@ -7,9 +7,6 @@
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">Changer le mot de passe</h4>
-              <p class="card-description">
-                Basic form layout
-              </p>
               @if(Session::has('error_message'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Erreur:</strong> {{ Session::get('error_message') }}

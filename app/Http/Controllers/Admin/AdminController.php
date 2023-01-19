@@ -70,6 +70,17 @@ class AdminController extends Controller
         return view('admin.settings.update_admin_password')->with(compact('adminDetails'));
     }
 
+    public function updateAdminDetails(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+
+            Admin::where('id', Auth::guard('admin')->user()->id)->update(['name'=>$data['name'], 'mobile'=>$data['mobile']]);
+            return redirect()->back()->with('success_message', 'Les informations ont été mis à jour avec succès.');
+        }
+        $adminDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first()->toArray();
+        return view('admin.settings.update_admin_details')->with(compact('adminDetails'));
+    }
+
     public function checkAdminPassword(Request $request){
         $data = $request->all();
         if(Hash::check($data['current_password'], Auth::guard('admin')->user()->password)){
