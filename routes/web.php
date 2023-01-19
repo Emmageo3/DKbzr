@@ -29,3 +29,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+//admin
+Route::get('admin/dashboard', 'App\Http\Controllers\Admin\AdminController@dashboard');
