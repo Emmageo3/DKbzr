@@ -47,7 +47,25 @@ class AdminController extends Controller
         return redirect('admin/login');
     }
 
-    public function updateAdminPassword(){
+    public function updateAdminPassword(Request $request){
+
+        if($request->isMethod('post')){
+            $data = $request->all();
+
+
+            if(Hash::check($data['current_password'],Auth::guard('admin')->user()->password)){
+                if($data['confirm_password']==$data['new_password']){
+                    Admin::where('id', Auth::guard('admin')->user()->id)->update(['password' =>
+                    bcrypt($data['new_password'])]);
+                    return redirect()->back()->with('success_message', 'Le mot de passe a été modifié avec succès.');
+                }else{
+                    return redirect()->back()->with('error_message', 'Les deux mots de passe ne matchent pas.');
+                }
+            }else{
+                return redirect()->back()->with('error_message', 'Le mot de passe saisi est incorrect.');
+            }
+        }
+
         $adminDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first()->toArray();
         return view('admin.settings.update_admin_password')->with(compact('adminDetails'));
     }

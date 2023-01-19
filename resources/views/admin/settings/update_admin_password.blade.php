@@ -10,7 +10,23 @@
               <p class="card-description">
                 Basic form layout
               </p>
-              <form class="forms-sample">
+              @if(Session::has('error_message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Erreur:</strong> {{ Session::get('error_message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+              @endif
+              @if(Session::has('success_message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Erreur:</strong> {{ Session::get('success_message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+              @endif
+              <form class="forms-sample" action="{{ url('admin/update-admin-password') }}" method="post">@csrf
                 <div class="form-group">
                   <label for="exampleInputUsername1">Adresse email</label>
                   <input type="text" class="form-control" value="{{ $adminDetails['email'] }}" readonly>
