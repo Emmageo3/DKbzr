@@ -29,42 +29,34 @@
               <div class="brand-logo">
                 <img src="{{ url('admin/images/logo.svg') }}" alt="logo">
               </div>
-              <h4>Hello! let's get started</h4>
-              <h6 class="font-weight-light">Sign in to continue.</h6>
-            @if(Session::has('error_message'))
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ Session::get('error_message')  }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <h4>Bienvenue admin</h4>
+              <h6 class="font-weight-light">Veuillez vous connecter pour continuer</h6>
+            @if ($errors->any())
+              <div>
+                <ul>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </ul>
+            </div>
             @endif
               <form class="pt-3" action="{{ url('admin/login') }}" method="post">@csrf
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control form-control-lg" id="email" placeholder="exemple@gmail.com" required>
+                  <input type="text" name="email" class="form-control form-control-lg" id="email" placeholder="Adresse email">
                 </div>
                 <div class="form-group">
-                  <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="**********" required >
+                  <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Mot de passe" >
                 </div>
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Connexion</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
-                  <div class="form-check">
-                    <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
-                      Keep me signed in
-                    </label>
-                  </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
-                </div>
-                <div class="mb-2">
-                  <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                    <i class="ti-facebook mr-2"></i>Connect using facebook
-                  </button>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  Don't have an account? <a href="register.html" class="text-primary">Create</a>
+                  <a href="#" class="auth-link text-black">Mot de passe oublié ?</a>
                 </div>
               </form>
             </div>
