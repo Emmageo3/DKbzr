@@ -21,15 +21,16 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Mot de passe actuel</label>
-                  <input type="password" class="form-control" name="current_password" required id="current_password">
+                  <input type="password" class="form-control" name="current_password" required id="current_password" placeholder="Veuillez saisir votre mot de passe actuel">
+                  <span id="check_password"></span>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputConfirmPassword1">Nouveau mot de passe</label>
-                  <input type="password" class="form-control" id="new_password" name="new_password" required>
+                  <input type="password" class="form-control" id="new_password" name="new_password" required placeholder="Veuillez saisir votre nouveau mot de passe">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputConfirmPassword1">Confirmez le mot de passe</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required placeholder="Veuillez confirmer votre nouveau mot de passe">
                   </div>
                 <button type="submit" class="btn btn-primary mr-2">Enregistrer</button>
                 <button class="btn btn-light">Annuler</button>
