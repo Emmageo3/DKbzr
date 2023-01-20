@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Vendor;
 use Hash;
 use Auth;
 use Image;
@@ -103,5 +104,41 @@ class AdminController extends Controller
         }else{
             return "false";
         }
+    }
+
+    public function updateVendorDetails($slug, Request $request){
+        if($slug=="personal"){
+            if($request->isMethod('post')){
+                $data = $request->all();
+
+                if($request->hasFile('image')){
+                    $image_tmp = $request->file('image');
+                    if($image_tmp->isValid()){
+                        $extension = $image_tmp->getClientOriginalExtension();
+                        $imageName = rand(111, 99999).'.'.$extension;
+                        $imagePath = 'admin/images/photos/'.$imageName;
+                        Image::make($image_tmp)->save($imagePath);
+                    }
+                }else if(!empty($data['current_image'])){
+                    $imageName = $data['current_image'];
+                }else{
+                    $imageName = "";
+                }
+
+                Admin::where('id', Auth::guard('admin')->user()->id)->update(['name'=>$data['vendor_name'], 'mobile'=>$data['vendor_mobile'], 'image'=>$imageName]);
+                Vendor::where('id', Auth::guard('admin')->user()->vendor_id)->update(['name'=>$data['vendor_name'],
+                'mobile'=>$data['vendor_mobile'],'address'=>$data['address'], 'country'=>$data['country'], 'city'=>$data['city'], 'pincode'=>$data['pincode']]);
+
+
+                return redirect()->back()->with('success_message', 'Les informations ont été mis à jour avec succès.');
+            }
+            $vendorDetails = Vendor::where('id', Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+
+        }else if($slug == "business"){
+
+        }else if($slug == "bank"){
+
+        }
+        return view('admin.settings.update_vendor_details')->with(compact('slug', 'vendorDetails'));
     }
 }
