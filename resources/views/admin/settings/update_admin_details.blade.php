@@ -17,13 +17,13 @@
             @endif
             @if(Session::has('success_message'))
               <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong>Erreur:</strong> {{ Session::get('success_message') }}
+                  {{ Session::get('success_message') }}
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
               </div>
             @endif
-            <form class="forms-sample" action="{{ url('admin/update-admin-details') }}" method="post">@csrf
+            <form class="forms-sample" action="{{ url('admin/update-admin-details') }}" method="post" enctype="multipart/form-data">@csrf
               <div class="form-group">
                 <label for="exampleInputUsername1">Adresse email</label>
                 <input type="text" class="form-control" value="{{ $adminDetails['email'] }}" readonly>
@@ -38,11 +38,18 @@
                 <span id="check_password"></span>
               </div>
               <div class="form-group">
-                <label for="mobile">Nouveau mot de passe</label>
+                <label for="mobile">Numéro de téléphone</label>
                 <input type="text" class="form-control" name="mobile" value="{{ $adminDetails['mobile'] }}">
               </div>
+              <div class="form-group">
+                <label for="mobile">Photo de profil</label>
+                <input type="file" class="form-control" name="image">
+                @if(!empty(Auth::guard('admin')->user()->image))
+                    <a target="_blank" href="{{ url('admin/images/photos/'.Auth::guard('admin')->user()->image) }}">Voir la photo</a>
+                    <input type="hidden" name="current_image" value="{{ Auth::guard('admin')->user()->image }}">
+                @endif
+              </div>
               <button type="submit" class="btn btn-primary mr-2">Enregistrer</button>
-              <button class="btn btn-light">Annuler</button>
             </form>
           </div>
         </div>
