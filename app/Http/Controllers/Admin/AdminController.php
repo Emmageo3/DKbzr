@@ -178,4 +178,17 @@ class AdminController extends Controller
         }
         return view('admin.settings.update_vendor_details')->with(compact('slug', 'vendorDetails'));
     }
+
+    public function admins($type = null){
+        $admins = Admin::query();
+        if(!empty($type)){
+            $admins = $admins->where('type', $type);
+            $title = ucfirst($type);
+        }else{
+            $title = "Tous admins/sous-admins/vendeurs";
+        }
+        $admins = $admins->get()->toArray();
+
+        return view('admin.admins.admins')->with(compact('admins', 'title'));
+    }
 }

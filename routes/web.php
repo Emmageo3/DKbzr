@@ -48,6 +48,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::match(['get', 'post'], 'update-vendor-details/{slug}', 'AdminController@updateVendorDetails');
         //check admin password
         Route::post('check-admin-password', 'AdminController@checkAdminPassword');
+        //admins/subadmins/vendors
+        Route::get('admins/{type?}', 'AdminController@admins');
     });
 
 
