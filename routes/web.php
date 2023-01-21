@@ -50,6 +50,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('check-admin-password', 'AdminController@checkAdminPassword');
         //admins/subadmins/vendors
         Route::get('admins/{type?}', 'AdminController@admins');
+        //view vendor details
+        Route::get('view-vendor-details/{id}', 'AdminController@viewVendorDetails');
     });
 
 
