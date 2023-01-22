@@ -58,9 +58,13 @@
                 </td>
                 <td>
                    @if ($admin['status']==1)
-                       <i class="mdi mdi-bookmark-check" style="font-size: 25px"></i>
+                        <a class="updateAdminStatus" id="admin-{{ $admin['id'] }}" admin_id="{{ $admin['id'] }}" href="javascript:void(0)">
+                            <i class="mdi mdi-bookmark-check" style="font-size: 25px" status="Active"></i>
+                        </a>
                     @else
-                        <i class="mdi mdi-bookmark-outline" style="font-size: 25px"></i>
+                        <a class="updateAdminStatus" id="admin-{{ $admin['id'] }}" admin_id="{{ $admin['id'] }}" href="javascript:void(0)">
+                            <i class="mdi mdi-bookmark-outline" style="font-size: 25px" status="Inactive"></i>
+                        </a>
                    @endif
                 </td>
                 <td>
