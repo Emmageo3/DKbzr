@@ -40,18 +40,19 @@
               </div>
               <div class="form-group">
                 <label for="name">Pays</label>
-                <input type="text" class="form-control" name="country" value="{{ $vendorDetails['country'] }}">
-                <span id="check_password"></span>
+                <select name="country" class="form-control">
+                    @foreach ($countries as $country)
+                        <option value="{{ $country['country_name'] }}" @if($country['country_name'] == $vendorDetails['country']) selected @endif>{{ $country['country_name'] }}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="form-group">
                 <label for="name">Ville</label>
                 <input type="text" class="form-control" name="city" value="{{ $vendorDetails['city'] }}">
-                <span id="check_password"></span>
               </div>
               <div class="form-group">
                 <label for="name">Adresse</label>
                 <input type="text" class="form-control" name="address" value="{{ $vendorDetails['address'] }}">
-                <span id="check_password"></span>
               </div>
               <div class="form-group">
                 <label for="name">Code postal</label>
@@ -113,7 +114,11 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Pays </label>
-                    <input type="text" class="form-control" name="shop_country" value="{{ $vendorDetails['shop_country'] }}">
+                    <select name="shop_country" class="form-control">
+                        @foreach ($countries as $country)
+                            <option value="{{ $country['country_name'] }}" @if($country['country_name'] == $vendorDetails['shop_country']) selected @endif>{{ $country['country_name'] }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="name">Code pin</label>
