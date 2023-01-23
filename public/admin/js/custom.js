@@ -69,6 +69,28 @@ $(document).on("click", ".updateSectionStatus", function(){
     })
 })
 
+$(document).on("click", ".updateCategoryStatus", function(){
+    var status = $(this).children("i").attr("status")
+    var category_id = $(this).attr("category_id")
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'post',
+        url: "/admin/update-category-status",
+        data: {status:status, category_id:category_id},
+        success:function(resp){
+            if(resp['status']==0){
+                $("#category-"+category_id).html("<i class='mdi mdi-bookmark-outline' style='font-size: 25px' status='Inactive'></i>")
+            }else if(resp['status']==1){
+                $("#category-"+category_id).html("<i class='mdi mdi-bookmark-check' style='font-size: 25px' status='Active'></i>")
+            }
+        },error:function(){
+            alert('Erreur')
+        }
+    })
+})
+
 $('.confirmDelete').click(function(){
     var module = $(this).attr('module')
     var moduleid = $(this).attr('moduleid')
