@@ -5,6 +5,14 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Catégories</h4>
+        @if(Session::has('success_message'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ Session::get('success_message') }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+            @endif
         <div class="table-responsive pt-3">
           <table class="table table-bordered">
             <thead>
@@ -47,7 +55,7 @@
                     <a href="{{ url('admin/add-edit-section/'.$section['id']) }}">
                         <i class="mdi mdi-pencil-box" style="font-size: 25px"></i>
                     </a>
-                    <a href="{{ url('admin/delete-section/'.$section['id']) }}">
+                    <a title="catégorie" module="section" moduleid="{{ $section['id'] }}" class="confirmDelete" href="javascript:void(0)">
                         <i class="mdi mdi-file-excel-box" style="font-size: 25px"></i>
                     </a>
                 </td>

@@ -25,4 +25,10 @@ class SectionController extends Controller
             return response()->json(['status'=>$status, 'section_id'=>$data['section_id']]);
         }
     }
+
+    public function deleteSection($id){
+        Section::where('id', $id)->delete();
+        $message = "La catégorie a été supprimée avec succès !";
+        return redirect()->back()->with('success_message', $message);
+    }
 }
