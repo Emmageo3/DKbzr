@@ -4,6 +4,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
+        <a href="{{ url('admin/add-edit-section') }}" class="btn btn-block btn-primary" style="max-width: 150px; float:right; display:inline-block">Ajouter</a>
         <h4 class="card-title">Catégories</h4>
         @if(Session::has('success_message'))
               <div class="alert alert-success alert-dismissible fade show" role="alert">
