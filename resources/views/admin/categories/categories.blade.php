@@ -4,7 +4,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <a href="{{ url('admin/add-edit-section') }}" class="btn btn-block btn-primary" style="max-width: 150px; float:right; display:inline-block">Ajouter</a>
+        <a href="{{ url('admin/add-edit-category') }}" class="btn btn-block btn-primary" style="max-width: 150px; float:right; display:inline-block">Ajouter</a>
         <h4 class="card-title">Sous-categories</h4>
         @if(Session::has('success_message'))
               <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -43,6 +43,7 @@
             </thead>
             <tbody>
             @foreach ($categories as $category)
+            <tr>
                 @if (isset($category['parentcategory']['category_name']) && !empty($category['parentcategory']['category_name']))
                     <?php $parent_category = $category['parentcategory']['category_name']; ?>
                 @else
@@ -75,8 +76,9 @@
                     @endif
                 </td>
                 <td>
-
+                    edit
                 </td>
+            </tr>
             @endforeach
             </tbody>
           </table>
