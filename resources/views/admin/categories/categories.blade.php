@@ -76,7 +76,12 @@
                     @endif
                 </td>
                 <td>
-                    edit
+                    <a href="{{ url('admin/add-edit-category/'.$category['id']) }}">
+                        <i class="mdi mdi-pencil-box" style="font-size: 25px"></i>
+                    </a>
+                    <a title="catégorie" module="category" moduleid="{{ $category['id'] }}" class="confirmDelete" href="javascript:void(0)">
+                        <i class="mdi mdi-file-excel-box" style="font-size: 25px"></i>
+                    </a>
                 </td>
             </tr>
             @endforeach

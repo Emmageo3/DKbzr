@@ -36,15 +36,21 @@ class CategoryController extends Controller
         if($id==""){
             $title = "Ajouter une sous catégorie";
             $category = new Category;
+            $getCategories = array();
             $message = "La sous catégorie a été ajoutée avec succès !";
         }else{
             $title = "Modifier la sous catégorie";
             $category = Category::find($id);
+            $getCategories = Category::with('subcategories')->where(['parent_id'=>0, 'section_id'=>$category['section_id']])->get();
             $message = "La sous catégorie a été modifiée avec succès !";
         }
 
         if($request->isMethod('post')){
             $data = $request->all();
+
+            if($data['category_discount']==""){
+                $data['category_discount'] = 0;
+            }
 
             if($request->hasFile('category_image')){
                 $image_tmp = $request->file('category_image');
@@ -84,7 +90,15 @@ class CategoryController extends Controller
 
         $getSections = Section::get()->toArray();
 
-        return view('admin.categories.add_edit_category')->with(compact('title','category','getSections'));
+        return view('admin.categories.add_edit_category')->with(compact('title','category','getSections','getCategories'));
 
+    }
+
+    public function appendCategoriesLevel(Request $request){
+        if($request->ajax() ){
+            $data = $request->all();
+            $getCategories = Category::with('subcategories')->where(['parent_id'=>0, 'section_id'=>$data['section_id']])->get()->toArray();
+            return view('admin.categories.append_categories_level')->with(compact('getCategories'));
+        }
     }
 }
