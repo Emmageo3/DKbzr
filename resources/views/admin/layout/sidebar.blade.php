@@ -69,6 +69,9 @@
         <div class="collapse" id="ui-catalogue">
           <ul class="nav flex-column sub-menu" style="background-color: #fff !important;">
             <li class="nav-item">
+                <a @if(Session::get('page') == "brands") style="background-color: #4B49AC !important; color: #fff !important" @else style="background-color: #fff !important; color: #4B49AC !important"  @endif class="nav-link" href="{{ url('admin/brands') }}">Marques</a>
+            </li>
+            <li class="nav-item">
                 <a @if(Session::get('page') == "sections") style="background-color: #4B49AC !important; color: #fff !important" @else style="background-color: #fff !important; color: #4B49AC !important"  @endif class="nav-link" href="{{ url('admin/sections') }}">Catégories</a>
             </li>
             <li class="nav-item">

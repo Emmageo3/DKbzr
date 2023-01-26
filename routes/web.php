@@ -77,6 +77,15 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('delete-category/{id}', 'CategoryController@deleteCategory');
         //delete category image
         Route::get('delete-category-image/{id}', 'CategoryController@deleteCategoryImage');
+
+        //brands
+        Route::get('brands', 'BrandController@brands');
+        //update section status
+        Route::post('update-brand-status', 'BrandController@updateBrandStatus');
+        //delete section
+        Route::get('delete-brand/{id}', 'BrandController@deleteBrand');
+        //add/edit section
+        Route::match(['get', 'post'], 'add-edit-brand/{id?}','BrandController@addEditBrand');
     });
 
 

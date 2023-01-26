@@ -69,6 +69,28 @@ $(document).on("click", ".updateSectionStatus", function(){
     })
 })
 
+$(document).on("click", ".updateBrandStatus", function(){
+    var status = $(this).children("i").attr("status")
+    var brand_id = $(this).attr("brand_id")
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'post',
+        url: "/admin/update-brand-status",
+        data: {status:status, brand_id:brand_id},
+        success:function(resp){
+            if(resp['status']==0){
+                $("#brand-"+brand_id).html("<i class='mdi mdi-bookmark-outline' style='font-size: 25px' status='Inactive'></i>")
+            }else if(resp['status']==1){
+                $("#brand-"+brand_id).html("<i class='mdi mdi-bookmark-check' style='font-size: 25px' status='Active'></i>")
+            }
+        },error:function(){
+            alert('Erreur')
+        }
+    })
+})
+
 $(document).on("click", ".updateCategoryStatus", function(){
     var status = $(this).children("i").attr("status")
     var category_id = $(this).attr("category_id")
