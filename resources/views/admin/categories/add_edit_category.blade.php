@@ -53,6 +53,10 @@
               <div class="form-group">
                 <label for="mobile">Photo</label>
                 <input type="file" class="form-control" name="category_image">
+                @if(!empty($category['category_image']))
+                    <a target="_blank" href="{{ url('admin/images/categories/'.$category['category_image']) }}">Voir la photo</a>
+                    <input type="hidden" name="current_image" value="{{ $category['category_image'] }}">
+                @endif
               </div>
               <div class="form-group">
                 <label for="name">Remise sur la catégorie</label>

@@ -52,6 +52,41 @@ class CategoryController extends Controller
                 $data['category_discount'] = 0;
             }
 
+            if($data['description']==""){
+                $data['description'] = "";
+            }
+
+            if($data['meta_title']==""){
+                $data['meta_title'] = 0;
+            }
+
+            if($data['meta_keywords']==""){
+                $data['meta_keywords'] = 0;
+            }
+
+            if($data['meta_description']==""){
+                $data['meta_description'] = 0;
+            }
+
+            $rules =[
+                'category_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'section_id' => 'required',
+                'url' => 'required'
+            ];
+
+            $customMessages = [
+                'category_name.required' => "Veuillez ajouter une sous catégorie",
+                'category_name.regex' => "Veuillez ajouter un nom valide",
+                'section_id.required' => "Veuillez choisir une catégorie",
+                'url.required' => "Veuillez ajouter l'url de la sous catégorie"
+            ];
+
+            $this->validate($request,$rules,$customMessages);
+
+
+
+
+
             if($request->hasFile('category_image')){
                 $image_tmp = $request->file('category_image');
                 if($image_tmp->isValid()){
@@ -61,8 +96,10 @@ class CategoryController extends Controller
                     Image::make($image_tmp)->save($imagePath);
                     $category->category_image = $imageName;
                 }
+            }else if(!empty($data['current_image'])){
+                $imageName = $data['current_image'];
             }else{
-                $category->category_image = $imageName;
+                $imageName = "";
             }
 
             $category->section_id = $data['section_id'];

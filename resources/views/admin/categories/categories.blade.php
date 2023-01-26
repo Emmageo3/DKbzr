@@ -59,7 +59,9 @@
                     {{ $parent_category }}
                 </td>
                 <td>
+                    @if(!empty($category['section']['name']))
                     {{ $category['section']['name'] }}
+                    @endif
                 </td>
                 <td>
                   {{ $category['url'] }}
