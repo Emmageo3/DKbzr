@@ -55,7 +55,10 @@
                 <input type="file" class="form-control" name="category_image">
                 @if(!empty($category['category_image']))
                     <a target="_blank" href="{{ url('admin/images/categories/'.$category['category_image']) }}">Voir la photo</a>
-                    <input type="hidden" name="current_image" value="{{ $category['category_image'] }}">
+                    <input type="hidden" name="current_image" value="{{ $category['category_image'] }}">&nbsp;|&nbsp;
+                    <a title="catégorie" module="category-image" moduleid="{{ $category['id'] }}" class="confirmDelete" href="javascript:void(0)">
+                        Supprimer
+                    </a>
                 @endif
               </div>
               <div class="form-group">
