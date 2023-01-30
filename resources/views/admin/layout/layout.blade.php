@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ url('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
   <link rel="stylesheet" href="{{ url('admin/vendors/ti-icons/css/themify-icons.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url('admin/js/select.dataTables.min.css') }}">
+  <link rel="stylesheet" href="{{ url('admin/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url('admin/css/dataTables.bootstrap5.min.css') }}">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ url('admin/css/vertical-layout-light/style.css') }}">
@@ -53,6 +55,7 @@
   <script src="{{ url('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
   <script src="{{ url('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
   <script src="{{ url('admin/js/dataTables.select.min.js') }}"></script>
+  <script src="{{ url('admin/js/data-table.js') }}"></script>
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
@@ -67,7 +70,11 @@
   <script src="{{  url('admin/js/custom.js') }}"></script>
   <script src="{{  url('admin/js/Chart.roundedBarCharts.js') }}"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="{{ url('admin/js/dataTables.bootstrap5.min.js') }}"></script>
+  <script src="{{ url('admin/js/jquery.dataTables.min.js') }}"></script>
   <!-- End custom js for this page-->
+
 </body>
 
 </html>

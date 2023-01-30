@@ -15,7 +15,7 @@
               </div>
             @endif
         <div class="table-responsive pt-3">
-          <table class="table table-bordered">
+          <table id="sections" class="table table-bordered">
             <thead>
               <tr>
                 <th>
