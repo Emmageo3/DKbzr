@@ -92,7 +92,7 @@ class CategoryController extends Controller
                 if($image_tmp->isValid()){
                     $extension = $image_tmp->getClientOriginalExtension();
                     $imageName = rand(111, 99999).'.'.$extension;
-                    $imagePath = 'admin/images/categories/'.$imageName;
+                    $imagePath = 'front/images/category_images/'.$imageName;
                     Image::make($image_tmp)->save($imagePath);
                     $category->category_image = $imageName;
                 }

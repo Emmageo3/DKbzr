@@ -22,6 +22,9 @@
                   #
                 </th>
                 <th>
+                    Image
+                </th>
+                <th>
                     Nom
                 </th>
                 <th>
@@ -51,6 +54,9 @@
                 @endif
                 <td>
                     {{ $category['id'] }}
+                </td>
+                <td>
+                    <img src="{{ asset('front/images/category_images/'.$category['category_image']) }}" style="height: 100px; width: 100px; border-radius: 0; object-fit: cover">
                 </td>
                 <td>
                     {{ $category['category_name'] }}

@@ -22,6 +22,9 @@
                   #
                 </th>
                 <th>
+                    Image
+                </th>
+                <th>
                   Nom
                 </th>
                 <th>
@@ -52,6 +55,13 @@
               <tr>
                 <td>
                   {{ $product['id'] }}
+                </td>
+                <td>
+                    @if(!empty($product['product_image']))
+                    <img src="{{ asset('front/images/product_images/small/'.$product['product_image']) }}" style="border-radius: 0; height: 150px; width: 150px; object-fit: cover">
+                    @else
+                        Pas d'image pour ce produit
+                    @endif
                 </td>
                 <td>
                   {{ $product['product_name'] }}
