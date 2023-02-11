@@ -169,4 +169,15 @@ class ProductController extends Controller
         $message="L'image a été supprimée avec succès";
         return redirect()->back()->with('success_message',$message);
     }
+
+    public function addAttributes(Request $request, $id){
+        $product = Product::find($id);
+
+        if($request->isMethod('post')){
+            $data = $request->all();
+            echo "<pre>"; print_r($data); die;
+        }
+
+        return view('admin.attributes.add_edit_attributes')->with(compact('product'));
+    }
 }

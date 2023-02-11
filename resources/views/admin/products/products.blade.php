@@ -100,6 +100,9 @@
                     <a href="{{ url('admin/add-edit-product/'.$product['id']) }}">
                         <i class="mdi mdi-pencil-box" style="font-size: 25px"></i>
                     </a>
+                    <a href="{{ url('admin/add-attributes/'.$product['id']) }}">
+                        <i class="mdi mdi-plus-box" style="font-size: 25px"></i>
+                    </a>
                     <a title="catégorie" module="product" moduleid="{{ $product['id'] }}" class="confirmDelete" href="javascript:void(0)">
                         <i class="mdi mdi-file-excel-box" style="font-size: 25px"></i>
                     </a>
