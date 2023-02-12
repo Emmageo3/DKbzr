@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Section;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ProductAttribute;
 use Session;
 use Auth;
 use Image;
@@ -171,11 +172,36 @@ class ProductController extends Controller
     }
 
     public function addAttributes(Request $request, $id){
-        $product = Product::find($id);
+        $product = Product::with('attributes')->find($id);
 
         if($request->isMethod('post')){
             $data = $request->all();
-            echo "<pre>"; print_r($data); die;
+
+            foreach($data['sku'] as $key => $value){
+                if(!empty($value)){
+
+                    $skuCount = ProductAttribute::where('sku',$value)->count();
+                    if($skuCount>0){
+                        return redirect()->back()->with('error_message', 'Ce code existe déja');
+                    }
+
+                    $sizeCount = ProductAttribute::where(['product_id'=>$id, 'size', $data['size'][$key]])->count();
+                    if($sizeCount>0){
+                        return redirect()->back()->with('error_message', 'Cette taille existe déja');
+                    }
+
+                    $attribute = new ProductAttribute;
+                    $attribute->product_id = $id;
+                    $attribute->sku = $value;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->status = 1;
+                    $attribute->save();
+                }
+            }
+
+            return redirect()->back()->with('success_message','Vos propriétés ont été enregistrées avec succès');
         }
 
         return view('admin.attributes.add_edit_attributes')->with(compact('product'));

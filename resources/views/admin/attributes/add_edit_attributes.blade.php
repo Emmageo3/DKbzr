@@ -77,6 +77,77 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Attributs</h4>
+        <div class="table-responsive pt-3">
+          <table id="products" class="table table-bordered">
+            <thead>
+              <tr>
+                <th>
+                    Sku
+                </th>
+                <th>
+                    Taille
+                </th>
+                <th>
+                    Prix
+                </th>
+                <th>
+                    Stock
+                </th>
+                <th>
+                  Statut
+                </th>
+                <th>
+                    Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach ($product['attributes'] as $attribute)
+              <tr>
+                <td>
+                  {{ $attribute['sku'] }}
+                </td>
+                <td>
+                  {{ $attribute['size'] }}
+                </td>
+                <td>
+                    {{ $attribute['price'] }}
+                </td>
+                <td>
+                    {{ $attribute['stock'] }}
+                </td>
+                <td>
+                    @if ($attribute['status']==1)
+                    <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)">
+                        <i class="mdi mdi-bookmark-check" style="font-size: 25px" status="Active"></i>
+                    </a>
+                    @else
+                        <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)">
+                            <i class="mdi mdi-bookmark-outline" style="font-size: 25px" status="Inactive"></i>
+                        </a>
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ url('admin/add-edit-attribute/'.$attribute['id']) }}">
+                        <i class="mdi mdi-pencil-box" style="font-size: 25px"></i>
+                    </a>
+                    <a title="attribute" module="attribute" moduleid="{{ $attribute['id'] }}" class="confirmDelete" href="javascript:void(0)">
+                        <i class="mdi mdi-file-excel-box" style="font-size: 25px"></i>
+                    </a>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
 
 @endsection
