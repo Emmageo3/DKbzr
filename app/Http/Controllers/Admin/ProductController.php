@@ -206,4 +206,29 @@ class ProductController extends Controller
 
         return view('admin.attributes.add_edit_attributes')->with(compact('product'));
     }
+
+    public function updateAttributeStatus(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            if($data['status'] == "Active"){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            ProductAttribute::where('id', $data['attribute_id'])->update(['status'=>$status]);
+            return response()->json(['status'=>$status, 'attribute_id'=>$data['attribute_id']]);
+        }
+    }
+
+    public function editAttributes(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            foreach ($data['attributeId'] as $key => $attribute) {
+                if(!empty($attribute)){
+                    ProductAttribute::where(['id'=>$data['attributeId'][$key]])->update(['price'=>$data['price'][$key], 'stock'=>$data['stock'][$key]]);
+                }
+            }
+            return redirect()->back()->with('success_message', 'Les propriétés ont été modifiées avec succès');
+        }
+    }
 }

@@ -84,6 +84,8 @@
       <div class="card-body">
         <h4 class="card-title">Attributs</h4>
         <div class="table-responsive pt-3">
+        <form class="row forms-sample" action="{{ url('admin/edit-attributes/'.$product['id']) }}" method="post" enctype="multipart/form-data">@csrf
+
           <table id="products" class="table table-bordered">
             <thead>
               <tr>
@@ -109,6 +111,7 @@
             </thead>
             <tbody>
                 @foreach ($product['attributes'] as $attribute)
+                <input style="display: none" type="text" name="attributeId[]" value="{{ $attribute['id'] }}">
               <tr>
                 <td>
                   {{ $attribute['sku'] }}
@@ -117,10 +120,10 @@
                   {{ $attribute['size'] }}
                 </td>
                 <td>
-                    {{ $attribute['price'] }}
+                    <input type="text" name="price[]" value="{{ $attribute['price'] }}" required style="width: 100%">
                 </td>
                 <td>
-                    {{ $attribute['stock'] }}
+                    <input type="number" name="stock[]" value="{{ $attribute['stock'] }}" required style="width: 100%">
                 </td>
                 <td>
                     @if ($attribute['status']==1)
@@ -145,6 +148,8 @@
               @endforeach
             </tbody>
           </table>
+          <button type="submit" class="btn btn-primary">Mettre à jour</button>
+            </form>
         </div>
       </div>
     </div>
